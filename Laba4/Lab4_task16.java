@@ -1,15 +1,25 @@
 package Laba4;
+import java.util.Scanner;
+public class Lab4_task16 { 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-public class Lab4_task16 {
- public static void main(String[] args) {
-        int[] array = {2, 4, 6, 8};
+        System.out.print("Введiть кiлькiсть елементiв у масивi: ");
+        int n = scanner.nextInt();
+        int[] array = new int[n];
+
+        System.out.println("Введiть елементи масиву:");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
         double result = calculateGeometricMean(array);
-        System.out.println("Середнє геометричне парних елементів: " + result);
+        System.out.println("Середнє геометричне парних елементiв: " + result);
     }
 
     public static double calculateGeometricMean(int[] array) {
         if (array == null || array.length == 0) {
-            throw new IllegalArgumentException("Масив не може бути порожнім.");
+            throw new IllegalArgumentException("Масив не може бути поржнiм.");
         }
 
         double product = 1.0;
