@@ -1,18 +1,21 @@
 package Laba4;
+import java.util.Arrays;
 import java.util.Scanner;
 public class Lab4_task16 { 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+     public static void main(String[] args) {
+    //     Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Введiть кiлькiсть елементiв у масивi: ");
-        int n = scanner.nextInt();
-        int[] array = new int[n];
+    //     System.out.print("Введiть кiлькiсть елементiв у масивi: ");
+    //     int n = scanner.nextInt();
+    //     int[] array = new int[n];
 
-        System.out.println("Введiть елементи масиву:");
-        for (int i = 0; i < n; i++) {
-            array[i] = scanner.nextInt();
-        }
-
+    //     System.out.println("Введiть елементи масиву:");
+    //     for (int i = 0; i < n; i++) {
+    //         array[i] = scanner.nextInt();
+    //     }
+    int[] array = new int[4];
+Arrays.fill(array, 10);
+System.out.println(Arrays.toString(array));
         double result = calculateGeometricMean(array);
         System.out.println("Середнє геометричне парних елементiв: " + result);
     }
