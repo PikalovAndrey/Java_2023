@@ -1,8 +1,4 @@
-package Laba7;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 // Клас Студент
 class Student {
@@ -18,7 +14,7 @@ class Student {
         this.averageGrade = averageGrade;
     }
 
-    // Геттери та сеттери (можете додати інші методи за необхідності)
+    // Геттери та сеттери
 
     public String getFirstName() {
         return firstName;
@@ -40,36 +36,36 @@ class Student {
 // Клас Факультет
 class Faculty {
     private String name;
-    private List<Student> students;
+    private Set<Student> students; // Змінено тип на Set
 
     public Faculty(String name) {
         this.name = name;
-        this.students = new ArrayList<>();
+        this.students = new HashSet<>(); // Змінено на HashSet
     }
 
     public void addStudent(Student student) {
         students.add(student);
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
     public String getName() {
         return name;
-   }
+    }
 
-    // Геттери та сеттери (можете додати інші методи за необхідності)
+    // Геттери та сеттери
 }
 
 // Клас Інститут
 class Institute {
     private String name;
-    private List<Faculty> faculties;
+    private Set<Faculty> faculties; // Змінено тип на Set
 
     public Institute(String name) {
         this.name = name;
-        this.faculties = new ArrayList<>();
+        this.faculties = new HashSet<>(); // Змінено на HashSet
     }
 
     public void addFaculty(Faculty faculty) {
@@ -98,21 +94,24 @@ class Institute {
         return largestFaculty;
     }
 
-    public List<Student> getHighAchievingStudents() {
-        List<Student> highAchievingStudents = new ArrayList<>();
+    // Метод для отримання студентів з високим середнім балом за допомогою Map
+    public Map<Faculty, Set<Student>> getHighAchievingStudents() {
+        Map<Faculty, Set<Student>> highAchievingStudentsMap = new HashMap<>();
 
         for (Faculty faculty : faculties) {
+            Set<Student> highAchievingStudents = new HashSet<>();
             for (Student student : faculty.getStudents()) {
                 if (student.getAverageGrade() >= 95 && student.getAverageGrade() <= 100) {
                     highAchievingStudents.add(student);
                 }
             }
+            highAchievingStudentsMap.put(faculty, highAchievingStudents);
         }
 
-        return highAchievingStudents;
+        return highAchievingStudentsMap;
     }
 
-    // Геттери та сеттери (можете додати інші методи за необхідності)
+    // Геттери та сеттери 
 }
 
 public class Main {
@@ -142,15 +141,18 @@ public class Main {
             System.out.println("Iнститут не має факультетiв");
         }
 
-        // Отримання студентів з високим середнім балом
-        List<Student> highAchievingStudents = institute.getHighAchievingStudents();
+        // Отримання студентів з високим середнім балом за допомогою Map
+        Map<Faculty, Set<Student>> highAchievingStudentsMap = institute.getHighAchievingStudents();
         System.out.println("Студенти з високим середнiм балом:");
 
-        // Використання нетипізованого ітератора
-        Iterator<Student> iterator = highAchievingStudents.iterator();
-        while (iterator.hasNext()) {
-            Student student = iterator.next();
-            System.out.println("Iм'я: " + student.getFirstName() + ", Прiзвище: " + student.getLastName() + ", Бал: " + student.getAverageGrade());
+        for (Map.Entry<Faculty, Set<Student>> entry : highAchievingStudentsMap.entrySet()) {
+            Faculty faculty = entry.getKey();
+            Set<Student> highAchievingStudents = entry.getValue();
+
+            System.out.println("Факультет: " + faculty.getName());
+            for (Student student : highAchievingStudents) {
+                System.out.println("Iм'я: " + student.getFirstName() + ", Прiзвище: " + student.getLastName() + ", Бал: " + student.getAverageGrade());
+            }
         }
     }
 }
