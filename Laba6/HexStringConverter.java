@@ -26,7 +26,7 @@ public class HexStringConverter {
     public static void main(String[] args) {
         // Приклади використання
         try {
-            System.out.println(hexStringToInt("CAFE")); // Результат: 51966
+            System.out.println(hexStringToInt("CAFECDADA")); // Результат: 51966
             System.out.println(hexStringToInt("1A"));   // Результат: 26
             System.out.println(hexStringToInt("FF"));   // Результат: 255
             System.out.println(hexStringToInt("0"));    // Результат: 0
