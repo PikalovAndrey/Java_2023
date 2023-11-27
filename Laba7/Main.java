@@ -18,7 +18,7 @@ class Student {
         this.averageGrade = averageGrade;
     }
 
-    // Геттери та сеттери (можете додати інші методи за необхідності)
+    // Геттери та сеттери 
 
     public String getFirstName() {
         return firstName;
@@ -59,7 +59,7 @@ class Faculty {
         return name;
    }
 
-    // Геттери та сеттери (можете додати інші методи за необхідності)
+    // Геттери та сеттери 
 }
 
 // Клас Інститут
@@ -77,42 +77,51 @@ class Institute {
     }
 
     public int getTotalStudents() {
-        int totalStudents = 0;
-        for (Faculty faculty : faculties) {
-            totalStudents += faculty.getStudents().size();
+    int totalStudents = 0;
+    for (Faculty faculty : faculties) {
+        Iterator<Student> iterator = faculty.getStudents().iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            totalStudents++;
         }
-        return totalStudents;
+    }
+    return totalStudents;
+}
+
+
+   public Faculty findLargestFaculty() {
+    Faculty largestFaculty = null;
+    int maxStudentCount = 0;
+
+    for (Faculty faculty : faculties) {
+        if (faculty.getStudents().size() > maxStudentCount) {
+            maxStudentCount = faculty.getStudents().size();
+            largestFaculty = faculty;
+        }
     }
 
-    public Faculty findLargestFaculty() {
-        Faculty largestFaculty = null;
-        int maxStudentCount = 0;
+    return largestFaculty;
+}
 
-        for (Faculty faculty : faculties) {
-            if (faculty.getStudents().size() > maxStudentCount) {
-                maxStudentCount = faculty.getStudents().size();
-                largestFaculty = faculty;
+
+   public List<Student> getHighAchievingStudents() {
+    List<Student> highAchievingStudents = new ArrayList<>();
+
+    for (Faculty faculty : faculties) {
+        Iterator<Student> iterator = faculty.getStudents().iterator();
+        while (iterator.hasNext()) {
+            Student student = iterator.next();
+            if (student.getAverageGrade() >= 95 && student.getAverageGrade() <= 100) {
+                highAchievingStudents.add(student);
             }
         }
-
-        return largestFaculty;
     }
 
-    public List<Student> getHighAchievingStudents() {
-        List<Student> highAchievingStudents = new ArrayList<>();
+    return highAchievingStudents;
+}
 
-        for (Faculty faculty : faculties) {
-            for (Student student : faculty.getStudents()) {
-                if (student.getAverageGrade() >= 95 && student.getAverageGrade() <= 100) {
-                    highAchievingStudents.add(student);
-                }
-            }
-        }
 
-        return highAchievingStudents;
-    }
-
-    // Геттери та сеттери (можете додати інші методи за необхідності)
+    // Геттери та сеттери 
 }
 
 public class Main {
