@@ -130,11 +130,13 @@ public class Main {
         Student student1 = new Student("Iван", "Середа", 1, 85.5);
         Student student2 = new Student("Петро", "Iваненко", 2, 98.0);
         Student student3 = new Student("Марiя", "Iвашкевич", 3, 92.0);
+        Student student4 = new Student("888", "888", 3, 99.0);
 
         Faculty faculty1 = new Faculty("Факультет програмування.");
         faculty1.addStudent(student1);
         faculty1.addStudent(student2);
         faculty1.addStudent(student3);
+        faculty1.addStudent(student4);
 
         Institute institute = new Institute("Iнститут технологiй");
         institute.addFaculty(faculty1);
@@ -155,7 +157,7 @@ public class Main {
         List<Student> highAchievingStudents = institute.getHighAchievingStudents();
         System.out.println("Студенти з високим середнiм балом:");
 
-        // Використання нетипізованого ітератора
+        // Використання типізованого ітератора
         Iterator<Student> iterator = highAchievingStudents.iterator();
         while (iterator.hasNext()) {
             Student student = iterator.next();
